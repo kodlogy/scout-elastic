@@ -1,0 +1,16 @@
+{
+    "name": "kodlogy/scout-elastic",
+    "description": "This package for scout elastic driver.",
+    "type": "library",
+    "require": {
+        "babenkoivan/scout-elasticsearch-driver": "2.4.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ali İldan",
+            "email": "ali.ildan@kodlogy.at"
+        }
+    ],
+    "minimum-stability": "beta"
+}
