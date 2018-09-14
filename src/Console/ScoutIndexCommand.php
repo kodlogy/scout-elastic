@@ -1,14 +1,8 @@
 <?php
 
-namespace Kodlogy\Console;
+namespace Kodlogy\ScoutElastic\Console;
 
-use App\Models\Account;
-use App\Models\Activity;
-use App\Models\Campaign;
-use App\Models\Contact;
-use App\Models\Domain;
-use App\Models\DomainCompany;
-use App\User;
+
 use Illuminate\Console\Command;
 
 class ScoutIndexCommand extends Command

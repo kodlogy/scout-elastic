@@ -8,9 +8,9 @@
 
 namespace Kodlogy\ScoutElastic;
 
-use Kodlogy\Console\ScoutIndexCommand;
 use InvalidArgumentException;
 use Laravel\Scout\EngineManager;
+use Kodlogy\ScoutElastic\Console\ScoutIndexCommand;
 use ScoutElastic\Console\ElasticMigrateCommand;
 use ScoutElastic\Console\ElasticUpdateMappingCommand;
 use ScoutElastic\Console\ElasticIndexCreateCommand;
