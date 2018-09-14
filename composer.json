@@ -12,5 +12,10 @@
             "email": "ali.ildan@kodlogy.at"
         }
     ],
-    "minimum-stability": "beta"
+    "minimum-stability": "beta",
+    "autoload": {
+        "psr-4": {
+            "Kodlogy\\ScoutElastic\\": "src/"
+        }
+    }
 }
