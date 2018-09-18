@@ -37,4 +37,60 @@ class KodlogyElasticEngine extends ElasticEngine
         $collection =Collection::make($elements);
         return $collection;
     }
+
+    public function get(Builder $builder)
+    {
+
+        $collection = Collection::make($this->map(
+            $this->search($builder), $builder->model
+        ));
+
+        if (isset($builder->with) && $collection->count() > 0) {
+            $collection->load($builder->with);
+        }
+
+        return $collection;
+    }
+
+
+    public function buildSearchQueryPayloadCollection(Builder $builder, array $options = [])
+    {
+        $payloadCollection = collect();
+        if ($builder instanceof SearchBuilder) {
+
+
+            $searchRules = $builder->rules ?: $builder->model->getSearchRules();
+
+            foreach ($searchRules as $rule) {
+                if (is_callable($rule)) {
+                    $queryPayload = call_user_func($rule, $builder);
+                } else {
+                    /** @var SearchRule $ruleEntity */
+                    $ruleEntity = new $rule($builder);
+
+                    if ($ruleEntity->isApplicable()) {
+                        $queryPayload = $ruleEntity->buildQueryPayload();
+                    } else {
+                        continue;
+                    }
+                }
+                $payload = $this->buildSearchQueryPayload(
+                    $builder,
+                    $queryPayload,
+                    $options
+                );
+                $payloadCollection->push($payload);
+            }
+        } else {
+            $payload = $this->buildSearchQueryPayload(
+                $builder,
+                ['must' => ['match_all' => new \stdClass()]],
+                $options
+            );
+
+            $payloadCollection->push($payload);
+        }
+
+        return $payloadCollection;
+    }
 }
