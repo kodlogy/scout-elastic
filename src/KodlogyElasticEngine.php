@@ -11,6 +11,7 @@ namespace Kodlogy\ScoutElastic;
 
 use ScoutElastic\ElasticEngine;
 use Illuminate\Database\Eloquent\Collection;
+use Laravel\Scout\Builder;
 
 class KodlogyElasticEngine extends ElasticEngine
 {
