@@ -48,6 +48,7 @@ class ScoutIndexCommand extends Command
         if ($isCreateIndex) {
             $classes = getClassesList(app_path('IndexConfigurators'));
             foreach ($classes as $class) {
+                $result = shell_exec("php artisan elastic:drop-index " . $class);
                 $result = shell_exec("php artisan elastic:create-index " . $class);
                 if (str_contains($result, "resource_already_exists_exception")) {
                     $result = shell_exec("php artisan elastic:update-index " . $class);
